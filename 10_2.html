@@ -13,6 +13,10 @@
           <p><span class="ui-icon ui-icon-alert"></span>
             Галереи с таким номером не существует</p>
         </div>
+        <div class="err_div ui-state-error ui-corner-all" id="no_num1">
+          <p><span class="ui-icon ui-icon-alert"></span>
+            Это не цифра, это что-то другое</p>
+        </div>
         <div class="err_div ui-state-highlight ui-corner-all" id="this_num">
           <p><span class="ui-icon ui-icon-info"></span>
           Данная галерея уже открыта</p>
@@ -50,13 +54,16 @@
               $("div.err_div").hide();
               $('div#no_num').show();
             }
-            else {
+            else if (n_gal>-1&&n_gal<6) {
               c_gal=n_gal;
               for (var i=0; i<10; i++)
               $('img.acord:eq('+i+')').attr('src',foto[c_gal][i].src);
               $('#dialoG').dialog("close");
               $("div.err_div").hide();
               $('#spinner').attr('value',c_gal);
+            }
+            else {
+              $('div#no_num1').show();
             }
           },
           Cancel:function(){
