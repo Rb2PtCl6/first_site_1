@@ -1,0 +1,98 @@
+﻿
+  <script src="./js/i18n/grid.locale-ru.js"></script>
+  <script src="./js/jquery.jqGrid.min.js"></script>
+  <link rel="stylesheet" href="./css/ui.jqgrid.css">
+  <script src="./js/slimbox2.js"></script>
+  <link rel="stylesheet" href="./css/slimbox2.css">
+
+  <script>
+    var mydata=new Array;
+    for (var j=0;j<50;j++){
+      mydata[j]=new Image;
+      if (j<10){
+        mydata[j].src=foto[0][j].src;
+        mydata[j].group_id='images0';
+        mydata[j].alt='image0'+j+'.jpg';
+        mydata[j].image='<center><a href="'+foto[0][j].src+'" title="Picture '+j+'" class="lightbox"><img src="'+foto[0][j].src+'" style="width:80px"></a></center>'
+      }
+      else if (j>9 && j<20) {
+        mydata[j].src=foto[0][j-10].src;
+        mydata[j].group_id='images1';
+        mydata[j].alt='image0'+(j-10)+'.jpg';
+        mydata[j].image='<center><a href="'+foto[1][j-10].src+'" title="Picture '+(j-10)+'" class="lightbox"><img src="'+foto[1][j-10].src+'" style="width:80px"></a></center>'
+      }
+      else if (j>19 && j<30) {
+        mydata[j].src=foto[0][j-20].src;
+        mydata[j].group_id='images2';
+        mydata[j].alt='image0'+(j-20)+'.jpg';
+        mydata[j].image='<center><a href="'+foto[2][j-20].src+'" title="Picture '+(j-20)+'" class="lightbox"><img src="'+foto[2][j-20].src+'" style="width:80px"></a></center>'
+      }
+      else if (j>29 && j<40) {
+        mydata[j].src=foto[0][j-30].src;
+        mydata[j].group_id='images3';
+        mydata[j].alt='image0'+(j-30)+'.jpg';
+        mydata[j].image='<center><a href="'+foto[3][j-30].src+'" title="Picture '+(j-30)+'" class="lightbox"><img src="'+foto[3][j-30].src+'" style="width:80px"></a></center>';
+      }
+      else {
+        mydata[j].src=foto[0][j-40].src;
+        mydata[j].group_id='images4';
+        mydata[j].alt='image0'+(j-40)+'.jpg';
+        mydata[j].image='<center><a href="'+foto[4][j-40].src+'" title="Picture '+(j-40)+'" class="lightbox"><img src="'+foto[4][j-40].src+'" style="width:80px"></a></center>'
+      };
+      mydata[j].id=j+1;
+    }
+  </script>
+  <style>
+    span.bold{font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold;}
+  </style>
+    <center>
+      <table id="list0"></table>
+      <div id="pager0"></div>
+    </center>
+    <script>
+      jQuery('#list0').jqGrid({
+        data:mydata,
+        datatype: "local",
+        height:hC-200,
+        width:wC*0.7,
+        colNames:['№','Folder','file','Image'],
+        colModel:[
+          {name:'id',index:'id',width:wC*0.2,sorttype:'int'},
+          {name:'group_id',index:'group_id',sortable: false, search: false},
+          {name:'alt',index:'alt',width:wC*0.3,summaryType:'count',summaryTpl:'<span class="bold">Всего:{0}</span>'},
+          {name:'image',index:'image',width:wC*0.3,sortable: false, search: false}
+        ],
+        multiselect: true,
+        rowNum:300,
+        sortname:'group_id',
+        footerrow: true,
+        viewrecords: true,
+        grouping: true,
+        //scroll: true,
+        groupingView:{
+          groupField:['group_id'],
+          groupSummary: true,
+          groupCollapse: true,
+          groupText:['<span class="bold">{0}</span>'],
+          groupColumnShow: false
+        },
+        pager:"#pager0",
+        caption:'Table with images',
+        onSelectRow: function(rowId){
+          var selectedRowsIds = $('#list0').jqGrid('getGridParam', 'selarrrow');
+          var total= 0;
+          $.each(selectedRowsIds, function(index, selectedRowId){
+            total++
+          })
+          $('#list0').jqGrid('footerData', 'set', {id:'Selected:',alt: total });
+        },
+        loadComplete: function(){
+          $('#list0').jqGrid('footerData','set',{id:'Selected:','alt':0});
+          $('a.lightbox').slimbox();
+        }
+      }).navGrid("#pager0",{
+        edit: false,
+        del: false,
+        add: false
+      })
+    </script>
