@@ -7,7 +7,7 @@
 
   <script>
     var mydata=new Array;
-    for (var j=0;j<50;j++){
+    for (var j=0;j<60;j++){
       mydata[j]=new Image;
       if (j<10){
         mydata[j].src=foto[0][j].src;
@@ -16,29 +16,35 @@
         mydata[j].image='<center><a href="'+foto[0][j].src+'" title="Picture '+j+'" class="lightbox"><img src="'+foto[0][j].src+'" style="width:80px"></a></center>'
       }
       else if (j>9 && j<20) {
-        mydata[j].src=foto[0][j-10].src;
+        mydata[j].src=foto[1][j-10].src;
         mydata[j].group_id='images1';
         mydata[j].alt='image0'+(j-10)+'.jpg';
         mydata[j].image='<center><a href="'+foto[1][j-10].src+'" title="Picture '+(j-10)+'" class="lightbox"><img src="'+foto[1][j-10].src+'" style="width:80px"></a></center>'
       }
       else if (j>19 && j<30) {
-        mydata[j].src=foto[0][j-20].src;
+        mydata[j].src=foto[2][j-20].src;
         mydata[j].group_id='images2';
         mydata[j].alt='image0'+(j-20)+'.jpg';
         mydata[j].image='<center><a href="'+foto[2][j-20].src+'" title="Picture '+(j-20)+'" class="lightbox"><img src="'+foto[2][j-20].src+'" style="width:80px"></a></center>'
       }
       else if (j>29 && j<40) {
-        mydata[j].src=foto[0][j-30].src;
+        mydata[j].src=foto[3][j-30].src;
         mydata[j].group_id='images3';
         mydata[j].alt='image0'+(j-30)+'.jpg';
         mydata[j].image='<center><a href="'+foto[3][j-30].src+'" title="Picture '+(j-30)+'" class="lightbox"><img src="'+foto[3][j-30].src+'" style="width:80px"></a></center>';
       }
-      else {
-        mydata[j].src=foto[0][j-40].src;
+      else if (j>39 && j<50){
+        mydata[j].src=foto[4][j-40].src;
         mydata[j].group_id='images4';
         mydata[j].alt='image0'+(j-40)+'.jpg';
         mydata[j].image='<center><a href="'+foto[4][j-40].src+'" title="Picture '+(j-40)+'" class="lightbox"><img src="'+foto[4][j-40].src+'" style="width:80px"></a></center>'
-      };
+      }
+      else {
+        mydata[j].src=foto[5][j-50].src;
+        mydata[j].group_id='images5';
+        mydata[j].alt='image0'+(j-50)+'.jpg';
+        mydata[j].image='<center><a href="'+foto[5][j-50].src+'" title="Picture '+(j-50)+'" class="lightbox"><img src="'+foto[5][j-50].src+'" style="width:80px"></a></center>'
+      }
       mydata[j].id=j+1;
     }
   </script>
