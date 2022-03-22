@@ -29,7 +29,7 @@
       var value=0;
       jQuery(document).ready(function($){
         $('div.main').width(wC).height(hC-30).css({'margin-top':'30px'});
-        $('img#img').attr('src',foto[1][0].src).width(wC*0.7).height(wC*0.35);
+        $('img#img').attr('src',foto[4][0].src).width(wC*0.7).height(wC*0.35);
         $('div#custom-handle').width('21px').height('21px');
         $('div#slider').css({'margin-top':'5px'}).width(wC*0.7).height('13px').slider({
           range:'min',
@@ -42,7 +42,7 @@
           slide:function(event, ui){
             value=ui.value;
             $('#custom-handle').text(value+1);
-            $('img#img').attr('src',foto[1][value].src);
+            $('img#img').attr('src',foto[4][value].src);
           }
         })
         $('#dialog').dialog({
@@ -54,13 +54,13 @@
         $('img#img').click(function(){
           $('#dialog').dialog('open');
           $('img#image1').attr('src',foto[1][value].src);
-          $('#dialog').append('<img id="image1" src="'+foto[1][value].src+'" style="width:'+wC*0.5+'px;height:'+wC*0.25+'px">');
+          $('#dialog').append('<img id="image1" src="'+foto[4][value].src+'" style="width:'+wC*0.5+'px;height:'+wC*0.25+'px">');
           $("#image1").addimagezoom({
             zoomrange: [3, 10],
             magnifiersize:[wC*0.25,wC*0.25],
             magnifierpos: "right",
             cursorshade: true,
-            largeimage: foto[1][value].src
+            largeimage: foto[4][value].src
           })
         })
         $('#dialog').on('dialogclose',function(event, ui){

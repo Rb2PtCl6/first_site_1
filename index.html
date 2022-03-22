@@ -46,6 +46,7 @@
             <input type="button" value="Page13" class="page" id="page13">
             <input type="button" value="Page14" class="page" id="page14">
             <input type="button" value="Page15" class="page" id="page15">
+            <input type="button" value="Page16" class="page" id="page16">
             <!--<input type="button" value="Page8" class="page" id="page8">-->
             <!--<input type="button" value="Page9" class="page" id="page9">-->
           </td>
@@ -210,6 +211,10 @@
               break;
             case "page15":
               pageT.append("<iframe id='frameB' src='slider2.html'></iframe>");
+              $("iframe#frameB").width(wC).height(hC);
+              break;
+              case "page16":
+              pageT.append("<iframe id='frameB' src='slider3.html'></iframe>");
               $("iframe#frameB").width(wC).height(hC);
               break;
             //case "page8":
