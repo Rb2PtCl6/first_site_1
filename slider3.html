@@ -20,6 +20,17 @@
     div.base img.full{opacity: 1.0;cursor: pointer;}
     div.base img{opacity: 0.3;}
   </style>
+  <script>
+    var m_arr=foto[4].length;
+    var all_num=Math.floor(m_arr/4);
+    var n_for_a=[0];
+    if (all_num>=1){
+      for (var i=1;i<all_num;i++){
+        n_for_a[i]=0+i*4;
+      }
+      n_for_a[all_num]=m_arr-4;
+    }
+  </script>
   </HEAD>
   <BODY>
     <center><div class="main">
@@ -65,22 +76,24 @@
           slide:function(event, ui){
             value=ui.value;
             $('#custom-handle').text(value+1);
-            //slider.goTo(value);
             $('div.base img').removeClass('full');
             $('div.tns-slide-active:eq('+value+') img').addClass('full');
           }
         });
+        var btn=0;
+        function fullImg(in01){
+          return $('div.base img:eq('+n_for_a[in01]+')').addClass('full')
+        }
         $('div.tns-nav button').click(function(){
-          var btn=$('div.tns-nav button').index(this);
+          if ($('div.tns-nav button').index(this)==btn) return;
+          btn=$('div.tns-nav button').index(this);
           value=0;
           $('#custom-handle').text(value+1);
           $('#slider').slider({value:value})
           $('div.tns-nav button').removeClass('ui-state-hover');
           $('div.tns-nav button:eq('+btn+')').addClass('ui-state-hover');
           $('div.base img').removeClass('full');
-          if (btn==0) {$('div.base img:eq(0)').addClass('full');} 
-          else if (btn==1) {$('div.base img:eq(4)').addClass('full');}
-          else if (btn==2) {$('div.base img:eq(6)').addClass('full');}
+          fullImg(btn)
         });
         $('#dialog').dialog({
           width:w*0.85,
