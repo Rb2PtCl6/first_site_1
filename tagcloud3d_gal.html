@@ -4,8 +4,6 @@
   <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
   <TITLE></TITLE>
   <script src="./js/jquery-1.8.3.min.js"></script>
-  <script src="./js/jquery-ui.min.js"></script>
-  <link rel="stylesheet" href="./css/jquery-ui.min.css">
   <script src="./js/tagcloud.jquery.min.js"></script>
   <script src="./lightbox/js/lightbox.js"></script>
   <link rel="stylesheet" href="./lightbox/css1/lightbox.css">
@@ -46,7 +44,7 @@
   </script>
   <style>
     html, body{padding: 0; margin: 0; overflow: hidden;}
-    div#tagcloud{font-size: 15px;font-family: Arial, Helvetica, sans-serif;border: 1px solid black;}
+    div#tagcloud{font-size: 15px;font-family: Arial, Helvetica, sans-serif;border: 1px solid black;border-radius: 4px;}
     div#tagcloud li{cursor: pointer;}
     a, a:hover, a:visited, a:active{color: black;}
     * {
@@ -62,17 +60,17 @@
   </HEAD>
   <BODY>
     <center>
-      <div id="tagcloud" class="ui-corner-all">
+      <div id="tagcloud">
         <ul></ul>
       </div>
     </center>
     <script>
       jQuery(function(){
         for (var i=0;i<60;i++){
-          $('div#tagcloud ul').append('<li><a href="'+loadImg[i].src+'"  data-title="'+loadImg[i].alt+'" data-lightbox="roadtrip">'+loadImg[i].alt+'</a></li>')
-          $('div#tagcloud ul').append('<li><a href="'+loadImg[i].src+'" data-title="'+loadImg[i].alt+'" data-lightbox="roadtrip1"><img src="'+loadImg[i].src+'"></a></li>')
-        }
-        $('div#tagcloud img').width('60px').height('30px')
+          $('div#tagcloud ul').append('<li><a href="'+loadImg[i].src+'"  data-title="'+loadImg[i].alt+'" data-lightbox="roadtrip">'+loadImg[i].alt+'</a></li>');
+          $('div#tagcloud ul').append('<li><a href="'+loadImg[i].src+'" data-title="'+loadImg[i].alt+'" data-lightbox="roadtrip1"><img src="'+loadImg[i].src+'"></a></li>');
+        };
+        $('div#tagcloud img').width('60px').height('30px');
         $('#tagcloud').tagoSphere({
           //height of sphere container
 			    height: h*0.85,
