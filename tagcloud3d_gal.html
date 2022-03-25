@@ -40,6 +40,13 @@
       }
       loadImg[nm].src=foto[ar0][nm1].src;
       loadImg[nm].alt='images'+ar0+'/image0'+nm1;
+    };
+    var sz;
+    if (w>h){
+      sz=h
+    }
+    else if (h>w) {
+      sz=w
     }
   </script>
   <style>
@@ -73,11 +80,11 @@
         $('div#tagcloud img').width('60px').height('30px');
         $('#tagcloud').tagoSphere({
           //height of sphere container
-			    height: h*0.85,
+			    height: sz*0.85,
 			    //width of sphere container
-			    width: h*0.85+20,
+			    width: sz*0.85+20,
 			    //radius of sphere
-			    radius: (h*0.85)/3,
+			    radius: (sz*0.85)/3,
 			    //rotation speed
 			    speed: 0.32,
 			    //sphere rotations slower
