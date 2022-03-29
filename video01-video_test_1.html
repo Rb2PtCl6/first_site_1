@@ -87,7 +87,8 @@
         player.api('find','v1');
         jQuery(function(){
           // main
-          var ww=$('body').width();
+          var ww=document.documentElement.clientWidth;
+          var hh=document.documentElement.clientHeight;
           $('body').addClass('ui-widget-content');
           $('input[type=button].inp').button();
           $('input[type=button].but').button();
