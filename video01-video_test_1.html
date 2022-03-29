@@ -6,10 +6,11 @@
   <link rel="icon" href="./video01/ico92x92.png" type="image/png">
   <script src="./video01/js1/current-device.min.js"></script>
   <!--<script src="./js1/playerjs(no_pl).js"></script>-->
+  <!--<script src="./video01/js1/playerjs-pleer-13-t10-16.6nwpn.js"></script>-->
+  <script src="./video01/js1/playerjs-pleer-13-t10-ael-yes16.10.js"></script>
   <script src="./js/jquery-3.6.0.min.js"></script>
   <script src="./video01/js1/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="./video01/css/jquery-ui.min.css">
-  <script src="./video01/js1/playerjs-pleer-13-t10-16.6nwpn.js"></script>
   <script>
     var re='DaL_video_new/';// path to video
     var ra='.mp4';// extension
@@ -58,8 +59,16 @@
       <div class="text1"></div>
       <center>
         <div class="text2">
-          <div class="part1">Текущее cостояние автозапуска / Выбранный набор видео</div>
-          <div class="part2"><input type="button" value="Отключено" class="but but10"> <input type="button" class="but" disabled value="/"> <input type="button" value="1" class=" but but11"></div>
+          <div class="part1">Текущее cостояние автозапуска / Выбранный набор видео / Автозапуск следущего видео / Loop 1 video</div>
+          <div class="part2">
+            <input type="button" value="Отключено" class="but but10">
+            <input type="button" class="but" disabled value="/">
+            <input type="button" value="1" class=" but but11">
+            <input type="button" class="but" disabled value="/">
+            <input type="button" value="Отключено" class=" but but12">
+            <input type="button" class="but" disabled value="/">
+            <input type="button" value="0" class=" but but13">
+          </div>
         </div>
       </center>
     </div>
@@ -96,11 +105,11 @@
           // size
           if ($('html.html1').hasClass('mobile')==true || $('html.html1').hasClass('tablet')==true){
             $('div.main').width(ww*0.995);
-            $('div.text2').width(ww*0.6);
+            $('div.text2').width(ww*0.8);
           }
           else{
             $('div.main').width(ww*0.6);
-            $('div.text2').width(ww*0.4);
+            $('div.text2').width(ww*0.6);
           };
           // autolaunch
           var n_text='preload'
@@ -139,6 +148,54 @@
             player.api(n_text)
             $('div.text1').empty().append(list1[ind]);
           })
+          // looped 1 video
+          var loop_stat_0=0;
+          $('input.but13').click(function(){
+            if (loop_stat==1){ // avoid problems 1
+              loop_stat=0;
+              player.api('autonext',0);
+              player.api('playlistloop',0);
+            $('input.but12').attr('value','Отключено');
+            }
+            if (loop_stat_0==0) {
+              $('input.but13').attr('value','1');
+              loop_stat_0=1
+            } 
+            else {
+              $('input.but13').attr('value','0');
+              loop_stat_0=0
+            }
+            player.api('loop',loop_stat_0);
+          })
+          // looped all videos
+          var loop_stat=0;
+          player.api('autonext',0);
+          player.api('playlistloop',0)
+          $('input.but12').click(function(){
+            if (loop_stat_0==1){ // avoid problems 0
+              loop_stat_0=0;
+              player.api('loop','0');
+              $('input.but13').attr('value','0');
+            }
+            if (loop_stat==0) {
+              $('input.but12').attr('value','Включено');
+              loop_stat=1
+            } 
+            else {
+              $('input.but12').attr('value','Отключено');
+              loop_stat=0
+            }
+            player.api('autonext',loop_stat);
+            player.api('playlistloop',loop_stat)
+          })
+          var stat;
+          var stat1;
+          $('div#player1').on('new',function(){
+            stat=player.api('playlist_id');
+            stat1=stat.slice(1);
+            $('div.text1').empty().append(list1[stat1-1])
+          })
+          player.api('volume',0)
         })
       </script>
   </BODY>
