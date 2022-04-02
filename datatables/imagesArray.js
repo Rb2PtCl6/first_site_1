@@ -31,5 +31,5 @@ for (var j=0;j<60;j++){
     arrOfImg[j].id=j+1;
     arrOfImg[j].alt='image0'+j1+'.jpg';
     arrOfImg[j].group_id='images'+arrId;
-    arrOfImg[j].image='<center><a href="'+foto[arrId][j1].src+'" title="Picture '+j1+'" class="lightbox"><img src="'+foto[arrId][j1].src+'" style="width:80px"></a></center>'
+    arrOfImg[j].image='<center><img src="'+foto[arrId][j1].src+'" style="width:80px"></center>'
 }
