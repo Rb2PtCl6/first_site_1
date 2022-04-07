@@ -13,20 +13,10 @@
   <style>
     body, html{padding: 0; margin: 0;min-width: 100%;min-height: 100%;position: relative;}
     .tg-overlay label {color: aliceblue;}
-    .thumbGridNav a.indexEl{background: rgb(1, 1, 1);}
   </style>
   </HEAD>
   <BODY>
-    <div class="imgGrid" id="imgGrid"
-      data-thumbgrid="true"
-      data-nav_effect="slideInverse"
-      data-nav_delay="60"
-      data-nav_timing="400"
-      data-nav_pagination="6"
-      data-gallery_effectnext="fadeIn"
-      data-gallery_effectprev="fadeOut"
-      data-gallery_cover="true"
-    ></div>
+    <div class="imgGrid" id="imgGrid"></div>
     <script>
       jQuery(function(){
         if (w<h){
@@ -38,7 +28,16 @@
         for(var i=0;i<20;i++){
           $('div.imgGrid').append('<img src="'+thumbarr[i].src+'" alt="img'+i+'" data-highres="'+fullarr[i].src+'" data-caption="img'+i+'">')
         };
-        jQuery("#imgGrid").thumbGrid();
+        jQuery("#imgGrid").thumbGrid({
+          thumbgrid:true,
+          nav_effect:"slideInverse",
+          nav_delay:60,
+          nav_timing:400,
+          nav_pagination:6,
+          gallery_effectnext:"fadeIn",
+          gallery_effectprev:"fadeOut",
+          gallery_cover:true
+        });
         jQuery.thumbGrid.transitions.fadeIn = {in: {x:"0", opacity:0, scale:0.9}, out: {x:0, opacity:0}};
         jQuery.thumbGrid.transitions.fadeOut = {in: {x:"0", opacity:0}, out: {x:0, scale:0.9, opacity:0}};
         jQuery.thumbGrid.transitions.slideLeft = {in: {x:$(window).width(), opacity:0}, out: {x:0, opacity:0}};
