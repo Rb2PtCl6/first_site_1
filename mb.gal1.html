@@ -1,0 +1,50 @@
+﻿<!DOCTYPE HTML>
+<HTML>
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <TITLE></TITLE>
+  <script src="./js/jquery-1.9.0.min.js"></script>
+  <script src="./js/jquery.mb.thumbGallery.js"></script>
+  <link rel="stylesheet" href="./css/thumbGrid.css">
+  <script src="./js/my.js"></script>
+  <script src="./images_sc/images_sc_arr.js"></script>
+  <script src="./js/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="./css/jquery-ui.min.css">
+  <style>
+    body, html{padding: 0; margin: 0;min-width: 100%;min-height: 100%;position: relative;}
+    .tg-overlay label {color: aliceblue;}
+    .thumbGridNav a.indexEl{background: rgb(1, 1, 1);}
+  </style>
+  </HEAD>
+  <BODY>
+    <div class="imgGrid" id="imgGrid"
+      data-thumbgrid="true"
+      data-nav_effect="slideInverse"
+      data-nav_delay="60"
+      data-nav_timing="400"
+      data-nav_pagination="6"
+      data-gallery_effectnext="fadeIn"
+      data-gallery_effectprev="fadeOut"
+      data-gallery_cover="true"
+    ></div>
+    <script>
+      jQuery(function(){
+        if (w<h){
+          $('div.imgGrid').attr('data-gallery_fullscreenw','90%').attr('data-gallery_fullscreenh',(w*0.9)/16*9)
+        }
+        else if (w>h){
+          $('div.imgGrid').attr('data-gallery_fullscreenh','90%').attr('data-gallery_fullscreenw',(h*0.9)/9*16)
+        };
+        for(var i=0;i<20;i++){
+          $('div.imgGrid').append('<img src="'+thumbarr[i].src+'" alt="img'+i+'" data-highres="'+fullarr[i].src+'" data-caption="img'+i+'">')
+        };
+        jQuery("#imgGrid").thumbGrid();
+        jQuery.thumbGrid.transitions.fadeIn = {in: {x:"0", opacity:0, scale:0.9}, out: {x:0, opacity:0}};
+        jQuery.thumbGrid.transitions.fadeOut = {in: {x:"0", opacity:0}, out: {x:0, scale:0.9, opacity:0}};
+        jQuery.thumbGrid.transitions.slideLeft = {in: {x:$(window).width(), opacity:0}, out: {x:0, opacity:0}};
+        jQuery.thumbGrid.transitions.slideRight = {in: {x:0, opacity:0}, out: {x:$(window).width(), opacity:0}};
+      });
+      
+    </script>
+  </BODY>
+</HTML>
