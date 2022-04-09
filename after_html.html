@@ -7,6 +7,7 @@
     <input type="button" value="Page3" class="page1" id="page3">
     <input type="button" value="Page4" class="page1" id="page4">
     <input type="button" value="Page5" class="page1" id="page5">
+    <input type="button" value="Page6" class="page1" id="page6">
     <!--<input type="button" value="Page4" class="page1" id="page4">-->
     <div class="link-box">
       <a href="datatables1.html" target="_blank">datatables1.html</a><br>
@@ -37,6 +38,10 @@
               break;
             case "page5":
               pageT1.append("<iframe id='frameB' src='mb.gal1.html'></iframe>");
+              $("iframe#frameB").width(wC).height(hC);
+              break;
+              case "page5":
+              pageT1.append("<iframe id='frameB' src='mb.zoom1.html'></iframe>");
               $("iframe#frameB").width(wC).height(hC);
               break;
             //case "page8":
