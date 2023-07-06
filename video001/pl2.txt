@@ -1,0 +1,7 @@
+[
+    {"title":"op1","file":"content/op1/master.m3u8","poster":"img/origami_fon_pc_1.png"},
+    {"title":"op2","file":"content/op2/master.m3u8","poster":"img/origami_fon_pc_2.png"},
+    {"title":"op3","file":"content/op3/master.m3u8","poster":"img/origami_fon_pc_3.png"},
+    {"title":"op4","file":"content/op4/master.m3u8","poster":"img/origami_fon_pc_13.png"},
+    {"title":"ed4","file":"content/ed4/master.m3u8","poster":"img/origami_fon_pc_14.png"}
+]

@@ -159,7 +159,34 @@
         var pageT=$("div.pageT");
         $("input.page").click(function(){
           pageT.empty();
-          switch (this.id){
+
+          var page_id = this.id;
+          var asc = {
+            page1:{type:"iframe",url:"1_3.html"},
+            page2:{type:"page",url:"4_1.html"},
+            page3:{type:"page",url:"5_1.html"},
+            page4:{type:"page",url:"7_1.html"},
+            page5:{type:"page",url:"8_2.html"},
+            page6:{type:"page",url:"9_1.html"},
+            page7:{type:"page",url:"10_1.html"},
+            page8:{type:"page",url:"11_1.html"},
+            page9:{type:"iframe",url:"11_2.html"},
+            page10:{type:"page",url:"11_3.html"},
+            page11:{type:"iframe",url:"11_4.html"},
+            page12:{type:"iframe",url:"13_1.html"},
+            page13:{type:"page",url:"15_1.html"},
+            page14:{type:"page",url:"after_html.html"},
+          };
+          
+          var thisEl = asc[page_id]
+          if (thisEl.type == "iframe"){
+            pageT.append("<iframe id='frameB' src='"+thisEl.url+"'></iframe>");
+            $("iframe#frameB").width(wC).height(hC);
+          } else if (thisEl.type == "page"){
+            pageT.load(thisEl.url);
+          }
+
+          /*switch (this.id){
             case "page1":
               pageT.append("<iframe id='frameB' src='1_3.html'></iframe>");
               $("iframe#frameB").width(wC).height(hC);
@@ -213,7 +240,7 @@
               //pageT.append("<iframe id='frameB' src='_no_v2_h.html'></iframe>");
               //$("iframe#frameB").width(wC).height(hC);
               //break;
-          }//closing switch
+          }//closing switch*/
         })//closing click
       })//closing jqury
     </script>
