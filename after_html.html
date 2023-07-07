@@ -1,73 +1,75 @@
-﻿
-    <style>
-      div.link-box{font-size: 22px;font-weight: bold;font-family: Arial, Helvetica, sans-serif;}
-    </style>
-    <input type="button" value="Page1" class="page1" id="page1">
-    <input type="button" value="Page2" class="page1" id="page2">
-    <input type="button" value="Page3" class="page1" id="page3">
-    <input type="button" value="Page4" class="page1" id="page4">
-    <input type="button" value="Page5" class="page1" id="page5">
-    <input type="button" value="Page6" class="page1" id="page6">
-    <!--<input type="button" value="Page4" class="page1" id="page4">-->
-    <div class="link-box">
-      <a href="datatables1.html" target="_blank">datatables1.html</a><br>
-      <a href="xzoom1.html" target="_blank">xzoom1.html</a><br>
-      <a href="video01-video_test_1.html" target="_blank">video01-video_test_1.html</a><br>
-      <a href="video001/main.html" target="_blank">video001/main.html</a><br>
-    </div>
-    <script>
-      jQuery(function(){
-        $('input.page1[type=button]').button().css({'padding':'0.2em','font-size':'22px'});
-        var pageT1=$("div.pageT");
-        $("input.page1").click(function(){
-          pageT1.empty();
-		  
-		      var id = this.id
-		      var assoc = {
-			      page1:"slider.html",
-			      page2:"slider2.html",
-			      page3:"slider3.html",
-			      page4:"tagcloud3d_gal.html",
-			      page5:"mb.gal1.html",
-			      page6:"mb.zoom1.html",
-		      }
-		      pageT1.append("<iframe id='frameB' src='"+assoc[id]+"'></iframe>");
-          $("iframe#frameB").width(wC).height(hC);
-			
-          /*switch (this.id){
-            case "page1":
-              pageT1.append("<iframe id='frameB' src='slider.html'></iframe>");
-              $("iframe#frameB").width(wC).height(hC);
-              break;
-            case "page2":
-              pageT1.append("<iframe id='frameB' src='slider2.html'></iframe>");
-              $("iframe#frameB").width(wC).height(hC);
-              break;
-            case "page3":
-              pageT1.append("<iframe id='frameB' src='slider3.html'></iframe>");
-              $("iframe#frameB").width(wC).height(hC);
-              break;
-            case "page4":
-              pageT1.append("<iframe id='frameB' src='tagcloud3d_gal.html'></iframe>");
-              $("iframe#frameB").width(wC).height(hC);
-              break;
-            case "page5":
-              pageT1.append("<iframe id='frameB' src='mb.gal1.html'></iframe>");
-              $("iframe#frameB").width(wC).height(hC);
-              break;
-              case "page6":
-              pageT1.append("<iframe id='frameB' src='mb.zoom1.html'></iframe>");
-              $("iframe#frameB").width(wC).height(hC);
-              break;
-            //case "page8":
-              //pageT1.load('_no_v3_nh.html');
-              //break;
-            //case "page8":
-              //pageT1.append("<iframe id='frameB' src='_no_v2_h.html'></iframe>");
-              //$("iframe#frameB").width(wC).height(hC);
-              //break;
-          }*/
-        })
-      })
-    </script>
+﻿<style>
+  div.link-box {
+    font-size: 22px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+</style>
+<input type="button" value="Page1" class="page1" id="page1">
+<input type="button" value="Page2" class="page1" id="page2">
+<input type="button" value="Page3" class="page1" id="page3">
+<input type="button" value="Page4" class="page1" id="page4">
+<input type="button" value="Page5" class="page1" id="page5">
+<input type="button" value="Page6" class="page1" id="page6">
+<!--<input type="button" value="Page4" class="page1" id="page4">-->
+<div class="link-box">
+  <a href="datatables1.html" target="_blank">datatables1.html</a><br>
+  <a href="xzoom1.html" target="_blank">xzoom1.html</a><br>
+  <a href="video01-video_test_1.html" target="_blank">video01-video_test_1.html</a><br>
+  <a href="video001/main.html" target="_blank">video001/main.html</a><br>
+</div>
+<script>
+  jQuery(function () {
+    $('input.page1[type=button]').button().css({ 'padding': '0.2em', 'font-size': '22px' });
+    var pageT1 = $("div.pageT");
+    $("input.page1").click(function () {
+      pageT1.empty();
 
+      var id = this.id
+      var assoc = {
+        page1: "slider.html",
+        page2: "slider2.html",
+        page3: "slider3.html",
+        page4: "tagcloud3d_gal.html",
+        page5: "mb.gal1.html",
+        page6: "mb.zoom1.html",
+      }
+      pageT1.append("<iframe id='frameB' src='" + assoc[id] + "'></iframe>");
+      $("iframe#frameB").width(wC).height(hC);
+
+      /*switch (this.id){
+        case "page1":
+          pageT1.append("<iframe id='frameB' src='slider.html'></iframe>");
+          $("iframe#frameB").width(wC).height(hC);
+          break;
+        case "page2":
+          pageT1.append("<iframe id='frameB' src='slider2.html'></iframe>");
+          $("iframe#frameB").width(wC).height(hC);
+          break;
+        case "page3":
+          pageT1.append("<iframe id='frameB' src='slider3.html'></iframe>");
+          $("iframe#frameB").width(wC).height(hC);
+          break;
+        case "page4":
+          pageT1.append("<iframe id='frameB' src='tagcloud3d_gal.html'></iframe>");
+          $("iframe#frameB").width(wC).height(hC);
+          break;
+        case "page5":
+          pageT1.append("<iframe id='frameB' src='mb.gal1.html'></iframe>");
+          $("iframe#frameB").width(wC).height(hC);
+          break;
+          case "page6":
+          pageT1.append("<iframe id='frameB' src='mb.zoom1.html'></iframe>");
+          $("iframe#frameB").width(wC).height(hC);
+          break;
+        //case "page8":
+          //pageT1.load('_no_v3_nh.html');
+          //break;
+        //case "page8":
+          //pageT1.append("<iframe id='frameB' src='_no_v2_h.html'></iframe>");
+          //$("iframe#frameB").width(wC).height(hC);
+          //break;
+      }*/
+    })
+  })
+</script>
