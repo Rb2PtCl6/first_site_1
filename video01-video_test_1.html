@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE HTML>
-<HTML lang="en" class="html1">
+<html lang="en">
 
-<HEAD>
-  <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <TITLE>Dynamic size</TITLE>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Dynamic size (player)</title>
   <link rel="icon" href="./video01/ico92x92.png" type="image/png">
   <script src="./video01/js1/current-device.min.js"></script>
   <!--<script src="./js1/playerjs(no_pl).js"></script>-->
@@ -12,36 +12,31 @@
   <script src="./js/jquery-3.6.0.min.js"></script>
   <script src="./video01/js1/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="./video01/css/jquery-ui.min.css">
-  <script>
-    var re = 'DaL_video_new/';// path to video
-    var ra = '.mp4';// extension
-    var list1 = new Array; // video names without extension and path
-    list1[0] = '『デート・ア・ライブ』 オープニング映像｜10周年記念！シリーズＯＰ映像リバイバル配信！';
-    list1[1] = '『デート・ア・ライブⅡ』 オープニング映像｜10周年記念！シリーズＯＰ映像リバイバル配信！';
-    list1[2] = '『デート・ア・ライブⅢ』 オープニング映像｜10周年記念！シリーズＯＰ映像リバイバル配信！';
-    list1[3] = 'Date A Live III - Ending｜Last Promise';
-    list1[4] = 'Date A Live Season 3 OST - AHIH (Origami Battle Theme)';
-    list1[5] = 'Date A Live Season 3 OST - Wedding March (Origami Theme)';
-    // poster array
-    var list2 = new Array;
-    for (var t = 0; t < 6; t++) {
-      list2[t] = new Image;
-      list2[t].src = './video01/images/image' + (t + 1) + '.png'
-    }
-    // links on video
-    var link_list = new Array;
-    link_list[0] = "https://drive.google.com/uc?export=download&id=1v22_YIN0hQNpe6MUOjmWTLYwRr-aWYyk";
-    link_list[1] = "https://drive.google.com/uc?export=download&id=1pm70Guc5seUrqhlRjFHQs4DHtG-QQERL";
-    link_list[2] = "https://drive.google.com/uc?export=download&id=1KLvIPR7CLpHHdImhBG3bMrTem9DvO-vi";
-    link_list[3] = "https://drive.google.com/uc?export=download&id=1Ff2saPtIUjbsV6qu7vR_BvZG-aiPyM9z";
-    link_list[4] = "https://drive.google.com/uc?export=download&id=1QMp9Rd13rExBymaDgynh-xdqfgzUWg4I";
-    link_list[5] = "https://drive.google.com/uc?export=download&id=1x0x3-4Z9bEswIKxMYX3CjRtTsZsUzBeO";
-  </script>
   <style>
     body,
     html {
       padding: 0;
       margin: 0;
+    }
+
+    body{
+      width: 100vw;
+      height: 100vh;
+      border: 0px;
+      overflow: hidden;
+    }
+
+    .box{
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    .center{
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     div.text1 {
@@ -66,18 +61,28 @@
       font-family: Arial, Helvetica, sans-serif;
       font-size: 1em;
       margin: 5px;
+      text-align: center
     }
 
     div.part2 {
       margin: 3px;
+      text-align: center
+    }
+
+    .player1 {
+      width: 100%;
+    }
+
+    .ui-widget-header{
+      font-weight: normal
     }
   </style>
-</HEAD>
+</head>
 
-<BODY>
-  <center>
+<body class="ui-widget-content">
+  <div class="center box">
     <div class="main">
-      <div class="inp1">
+      <div class="inp1 ui-widget-header ui-corner-top">
         <input type="button" value="Opening 1" id="but1" class="inp first_i">
         <input type="button" value="Opening 2" id="but2" class="inp first_i">
         <input type="button" value="Opening 3" id="but3" class="inp first_i">
@@ -86,9 +91,9 @@
         <input type="button" value="Wedding March" id="but6" class="inp second_i">
       </div>
       <div id="player1" class="player1"></div>
-      <div class="text1"></div>
-      <center>
-        <div class="text2">
+      <div class="text1 ui-widget-header ui-corner-bottom"></div>
+      <div class="center">
+        <div class="text2 ui-widget-header ui-corner-all">
           <div class="part1">Текущее cостояние автозапуска / Выбранный набор видео / Автозапуск следущего видео / Loop 1
             video</div>
           <div class="part2">
@@ -101,19 +106,47 @@
             <input type="button" value="0" class=" but but13">
           </div>
         </div>
-      </center>
+      </div>
     </div>
-  </center>
+  </div>
   <script>
+    var storage = [
+      {
+        displayed_name: "『デート・ア・ライブ』 オープニング映像｜10周年記念！シリーズＯＰ映像リバイバル配信！",
+        filename: "d22aa92e-4fb9-4ff2-988e-cba9325a7844"
+      },
+      {
+        displayed_name: "『デート・ア・ライブⅡ』 オープニング映像｜10周年記念！シリーズＯＰ映像リバイバル配信！",
+        filename: "7b05015e-0409-4da5-98e1-bec8048e2dbb"
+      },
+      {
+        displayed_name: "『デート・ア・ライブⅢ』 オープニング映像｜10周年記念！シリーズＯＰ映像リバイバル配信！",
+        filename: "e94da1c9-5f45-4564-8372-44a06bd96eed"
+      },
+      {
+        displayed_name: "Date A Live III - Ending｜Last Promise",
+        filename: "a318ecf1-62f5-41b8-831e-75fa913651a0"
+      },
+      {
+        displayed_name: "Date A Live Season 3 OST - AHIH (Origami Battle Theme)",
+        filename: "4673715e-ac01-4c9e-a49d-827167e32783"
+      },
+      {
+        displayed_name: "Date A Live Season 3 OST - Wedding March (Origami Theme)",
+        filename: "a7964897-4212-43b6-8c4b-1b8d560285c2"
+      }
+	]
+  var fileslist = [];
+  storage.forEach(function(obj, index){
+    fileslist.push({
+      file: `./video01/video/${obj.filename}.mp4`,
+      poster: `./video01/images/image${index + 1}.png`,
+      id: `v${index+1}`
+    })
+  })
+  console.table(fileslist)
     var player = new Playerjs({
-      id: "player1", file: [
-        { "file": link_list[0], "poster": list2[0].src, "id": "v1" },
-        { "file": link_list[1], "poster": list2[1].src, "id": "v2" },
-        { "file": link_list[2], "poster": list2[2].src, "id": "v3" },
-        { "file": link_list[3], "poster": list2[3].src, "id": "v4" },
-        { "file": link_list[4], "poster": list2[4].src, "id": "v5" },
-        { "file": link_list[5], "poster": list2[5].src, "id": "v6" },
-      ]
+      id: "player1", file: fileslist
     });
     player.api('volume', 0.8);
     player.api('find', 'v1');
@@ -121,21 +154,12 @@
       // main
       var ww = document.documentElement.clientWidth;
       var hh = document.documentElement.clientHeight;
-      $('body').addClass('ui-widget-content');
       $('input[type=button].inp').button();
       $('input[type=button].but').button();
-      $('div.inp1').addClass('ui-widget-header');
-      $('div.text1').addClass('ui-widget-header');
-      $('div.text2').addClass('ui-widget-header').addClass('ui-corner-all');
-      $('div.part1').css({ 'text-align': 'center' });
-      $('div.part2').css({ 'text-align': 'center' });
-      $('.ui-widget-header').css({ 'font-weight': 'normal' });
-      $('div.text1').addClass('ui-corner-bottom');
-      $('div.inp1').addClass('ui-corner-top');
-      $('div.player1').width('100%');
-      $('div.text1').append(list1[0]);
+      // $('div.inp1').addClass('ui-corner-top');
+      $('div.text1').append(storage[0].displayed_name);
       // adaptable player size
-      if ($('html.html1').hasClass('mobile') == true || $('html.html1').hasClass('tablet') == true) {
+      if ($('html').hasClass('mobile') || $('html').hasClass('tablet')) {
         $('div.main').width(ww * 0.995);
         $('div.text2').width(ww * 0.8);
       }
@@ -178,7 +202,7 @@
         if (player.api('playlist_id') == 'v' + (ind + 1)) return;
         player.api('find', 'v' + (ind + 1));
         player.api(n_text);
-        $('div.text1').empty().append(list1[ind]);
+        $('div.text1').empty().append(storage[ind].displayed_name);
       });
       // looped 1 video
       var loop_stat_0 = 0;
@@ -225,11 +249,11 @@
       $('div#player1').on('new', function () {
         stat = player.api('playlist_id');
         stat1 = stat.slice(1);
-        $('div.text1').empty().append(list1[stat1 - 1]);
+        $('div.text1').empty().append(storage[stat1 - 1].displayed_name);
       })
-      //player.api('volume',0);
+      // player.api('volume',0);
     })
   </script>
-</BODY>
+</body>
 
-</HTML>
+</html>
