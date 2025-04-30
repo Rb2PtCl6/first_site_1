@@ -136,120 +136,145 @@
         filename: "a7964897-4212-43b6-8c4b-1b8d560285c2"
       }
 	]
+  var storage2 = {
+    player: {},
+    ww: 0,
+    hh: 0,
+    next_text: "preload",
+    video_collection: 0,
+    active_index: 0,
+    prew_index: 0,
+    loop_stat: 0, // looped all videos
+    loop_stat_0: 0 // looped 1 video
+  }
+  /**
+   * Access to player api
+   * @param {string[]} arguments
+   * @return {any}
+  */
+  function interact_player(arguments){
+    return storage2.player.api(...arguments)
+  }
   var fileslist = [];
   storage.forEach(function(obj, index){
     fileslist.push({
       file: `./video01/video/${obj.filename}.mp4`,
-      poster: `./video01/images/image${index + 1}.png`,
-      id: `v${index+1}`
+      poster: `./video01/images/image${index}.png`,
+      id: `v${index}`
     })
   })
-  console.table(fileslist)
-    var player = new Playerjs({
+  // console.table(fileslist)
+    storage2.player = new Playerjs({
       id: "player1", file: fileslist
     });
-    player.api('volume', 0.8);
-    player.api('find', 'v1');
+    interact_player(['volume', 0.8]);
+    //interact_player(['find', 'v0']);
     jQuery(function () {
       // main
-      var ww = document.documentElement.clientWidth;
-      var hh = document.documentElement.clientHeight;
+      storage2.ww = document.documentElement.clientWidth;
+      storage2.hh = document.documentElement.clientHeight;
       $('input[type=button].inp').button();
       $('input[type=button].but').button();
       // $('div.inp1').addClass('ui-corner-top');
-      $('div.text1').append(storage[0].displayed_name);
+      $('div.text1').append(storage[storage2.active_index].displayed_name);
       // adaptable player size
       if ($('html').hasClass('mobile') || $('html').hasClass('tablet')) {
-        $('div.main').width(ww * 0.995);
-        $('div.text2').width(ww * 0.8);
+        $('div.main').width(storage2.ww * 0.995);
+        $('div.text2').width(storage2.ww * 0.8);
       }
       else {
-        $('div.main').width(ww * 0.6);
-        $('div.text2').width((ww * 0.6) - 2);
+        $('div.main').width(storage2.ww * 0.6);
+        $('div.text2').width((storage2.ww * 0.6) - 2);
       };
       // autolaunch
-      var n_text = 'preload'
       $('input.but10').click(function () {
-        if (n_text == 'preload') {
-          n_text = 'play';
+        if (storage2.next_text == 'preload') {
+          storage2.next_text = 'play';
           $('input.but10').attr('value', 'Включено');
         }
         else {
-          n_text = 'preload';
+          storage2.next_text = 'preload';
           $('input.but10').attr('value', 'Отключено');
         };
       });
       // video collections
       $('input.second_i').hide();
-      var vid_col = 0;
       $('input.but11').click(function () {
-        if (vid_col == 0) {
-          $('input.but11').attr('value', '2');
-          $('input.first_i').hide();
-          $('input.second_i').show();
-          vid_col = 1;
+        if (storage2.video_collection == 2) {
+          storage2.video_collection = 1;
         }
         else {
-          $('input.but11').attr('value', '1');
-          $('input.second_i').hide();
-          $('input.first_i').show();
-          vid_col = 0;
+          storage2.video_collection = 2;
         }
+        $('input.first_i').toggle();
+        $('input.second_i').toggle();
+        $('input.but11').attr('value', storage2.video_collection);
       });
       // click on input
       $('input.inp').click(function () {
-        var ind = $('div.inp1 input.inp').index(this);
-        if (player.api('playlist_id') == 'v' + (ind + 1)) return;
-        player.api('find', 'v' + (ind + 1));
-        player.api(n_text);
-        $('div.text1').empty().append(storage[ind].displayed_name);
+        var index = $('div.inp1 input.inp').index(this);
+        storage2.prew_index = storage2.active_index;
+        if (index == storage2.active_index) return;
+        storage2.active_index = index
+        interact_player(['find', `v${storage2.active_index}`]);
+        interact_player([storage2.next_text]);
+        $('div.text1').empty().append(storage[storage2.active_index].displayed_name);
       });
       // looped 1 video
-      var loop_stat_0 = 0;
       $('input.but13').click(function () {
-        if (loop_stat == 1) { // avoid problems 1
-          loop_stat = 0;
-          player.api('autonext', 0);
-          player.api('playlistloop', 0);
+        if (storage2.loop_stat == 1) { // avoid problems 1
+          storage2.loop_stat = 0;
+          interact_player(['autonext', 0]);
+          interact_player(['playlistloop', 0]);
           $('input.but12').attr('value', 'Отключено');
         }
-        if (loop_stat_0 == 0) {
-          $('input.but13').attr('value', '1');
-          loop_stat_0 = 1;
+        if (storage2.loop_stat_0 == 0) {
+          $('input.but13').attr('value', 1);
+          storage2.loop_stat_0 = 1;
         }
         else {
-          $('input.but13').attr('value', '0');
-          loop_stat_0 = 0;
+          $('input.but13').attr('value', 0);
+          storage2.loop_stat_0 = 0;
         }
-        player.api('loop', loop_stat_0);
+        interact_player(['loop', storage2.loop_stat_0]);
       });
       // looped all videos
-      var loop_stat = 0;
-      player.api('autonext', 0);
-      player.api('playlistloop', 0);
+      interact_player(['autonext', 0]);
+      interact_player(['playlistloop', 0]);
       $('input.but12').click(function () {
-        if (loop_stat_0 == 1) { // avoid problems 0
-          loop_stat_0 = 0;
-          player.api('loop', '0');
-          $('input.but13').attr('value', '0');
+        if (storage2.loop_stat_0 == 1) { // avoid problems 0
+          storage2.loop_stat_0 = 0;
+          interact_player(['loop', 0]);
+          $('input.but13').attr('value', 0);
         }
-        if (loop_stat == 0) {
+        if (storage2.loop_stat == 0) {
           $('input.but12').attr('value', 'Включено');
-          loop_stat = 1;
+          storage2.loop_stat = 1;
         }
         else {
           $('input.but12').attr('value', 'Отключено');
-          loop_stat = 0;
+          storage2.loop_stat = 0;
         }
-        player.api('autonext', loop_stat);
-        player.api('playlistloop', loop_stat);
+        interact_player(['autonext', storage2.loop_stat]);
+        interact_player(['playlistloop', storage2.loop_stat]);
       })
-      var stat;
-      var stat1;
       $('div#player1').on('new', function () {
-        stat = player.api('playlist_id');
-        stat1 = stat.slice(1);
-        $('div.text1').empty().append(storage[stat1 - 1].displayed_name);
+        var index = Number(interact_player(['playlist_id']).slice(1));
+        storage2.prew_index = storage2.active_index;
+        if (index == storage2.active_index) return;
+        storage2.active_index = index;
+        var tmp = storage2.active_index - storage2.prew_index;
+        if ((tmp == 1 && storage2.active_index == 3) || (tmp == -5 && storage2.active_index == 0)){
+          if (storage2.active_index == 3){
+            storage2.video_collection = 2;
+          } else {
+            storage2.video_collection = 1;
+          }
+          $('input.first_i').toggle();
+          $('input.second_i').toggle();
+          $('input.but11').attr('value', storage2.video_collection);
+        }
+        $('div.text1').empty().append(storage[storage2.active_index].displayed_name);
       })
       // player.api('volume',0);
     })
